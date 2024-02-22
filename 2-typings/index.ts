@@ -31,7 +31,7 @@ var TENTHS_LESS_THAN_HUNDRED: string[] = [
  * @returns {string}
  */
 function toWords(number: number | string, asOrdinal?: boolean): string {
-    var words;
+    var words: string;
     var num = parseInt(number.toString(), 10);
 
     if (!isFinite(num)) {
@@ -48,19 +48,14 @@ function toWords(number: number | string, asOrdinal?: boolean): string {
     return asOrdinal ? makeOrdinal(words) : words;
 }
 
-// 55
 
-function generateWords(number: number): string {
-  var remainder, word,
-      words = arguments[1];
+function generateWords(number: number, words: string[] = []): string {
+  var remainder: number = 0;
+  var word: string = '';
 
   // We’re done
   if (number === 0) {
       return !words ? 'zero' : words.join(' ').replace(/,$/, '');
-  }
-  // First run
-  if (!words) {
-      words = [];
   }
   // If negative, prepend “minus”
   if (number < 0) {
@@ -69,12 +64,11 @@ function generateWords(number: number): string {
   }
 
   if (number < 20) {
-      remainder = 0;
       word = LESS_THAN_TWENTY[number];
 
   } else if (number < ONE_HUNDRED) {
-      remainder = number % TEN;
-      word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)];
+      remainder = number % TEN; // 99 : 10 = 9
+      word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)]; // ninety
       // In case of remainder, we need to handle it here to be able to add the “-”
       if (remainder) {
           word += '-' + LESS_THAN_TWENTY[remainder];
@@ -82,7 +76,7 @@ function generateWords(number: number): string {
       }
 
   } else if (number < ONE_THOUSAND) {
-      remainder = number % ONE_HUNDRED;
+      remainder = number % ONE_HUNDRED; // 999: 100 = 99, 
       word = generateWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
 
   } else if (number < ONE_MILLION) {
@@ -108,7 +102,7 @@ function generateWords(number: number): string {
   }
 
   words.push(word);
-  return generateWords(remainder, words);
+  return generateWords(remainder, words); // (99, nine hundred), 
 }
 
 module.exports = toWords;
