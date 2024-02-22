@@ -67,8 +67,8 @@ function generateWords(number: number, words: string[] = []): string {
       word = LESS_THAN_TWENTY[number];
 
   } else if (number < ONE_HUNDRED) {
-      remainder = number % TEN; // 99 : 10 = 9
-      word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)]; // ninety
+      remainder = number % TEN;
+      word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)];
       // In case of remainder, we need to handle it here to be able to add the “-”
       if (remainder) {
           word += '-' + LESS_THAN_TWENTY[remainder];
@@ -76,7 +76,7 @@ function generateWords(number: number, words: string[] = []): string {
       }
 
   } else if (number < ONE_THOUSAND) {
-      remainder = number % ONE_HUNDRED; // 999: 100 = 99, 
+      remainder = number % ONE_HUNDRED; 
       word = generateWords(Math.floor(number / ONE_HUNDRED)) + ' hundred';
 
   } else if (number < ONE_MILLION) {
@@ -102,7 +102,7 @@ function generateWords(number: number, words: string[] = []): string {
   }
 
   words.push(word);
-  return generateWords(remainder, words); // (99, nine hundred), 
+  return generateWords(remainder, words);
 }
 
 module.exports = toWords;
