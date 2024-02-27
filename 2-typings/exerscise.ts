@@ -20,25 +20,6 @@ const office: {
   }
 }
 
-// {
-//   "topicId": 5,
-//   "status": "published" // "draft", "deleted"
-// }
-
-/* Ответ */
-// [
-//   {
-//       "question": "Как осуществляется доставка?",
-//       "answer": "быстро!",
-//       "tags": [
-//           "popular",
-//           "new"
-//       ],
-//       "likes": 3,
-//       "status": "published"
-//   }
-// ]
-
 enum PostStatus {
   PUBLISHED = 'published',
   DRAFT = 'draft',
