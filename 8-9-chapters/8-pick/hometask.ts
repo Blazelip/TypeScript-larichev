@@ -8,5 +8,5 @@ function pickObjectKeys<T extends object, K extends keyof T>(obj: T, keys: K[]):
       result[key] = obj[key]; // И тут не понятно, в чем ошибка
     }
     return result;
-  }, {});
+  }, {} as Partial<MyPick<T, K>>) as MyPick<T, K>;
 }
